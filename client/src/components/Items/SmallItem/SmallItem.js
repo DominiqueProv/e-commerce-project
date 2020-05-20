@@ -27,7 +27,7 @@ const SmallItem = ({
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const itemInCart = useSelector(state => state.userInfo.cart[id]);
+  // const itemInCart = useSelector(state => state.userInfo.cart[id]);
 
   function handleClickBigItem(ev) {
     ev.preventDefault();

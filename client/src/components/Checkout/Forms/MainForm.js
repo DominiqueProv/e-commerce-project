@@ -1,12 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import {
-  useDispatch,
-} from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
-import {
-  updateUserInfo,
-} from '../../../Redux/actions';
+import { updateUserInfo } from "../../../Redux/actions";
 
 import {
   validateEmail,
@@ -15,33 +11,32 @@ import {
   validateOnlyDigits,
   validateOnlyLetters,
   validateCreditCard,
-} from '../../../utils';
+} from "../../../utils";
 
-import UserInfoForm from './UserInfoForm';
-import ShippingAddressForm from './ShippingAddressForm';
-import BillingForm from './BillingForm';
-import Button from '../../UnstyledButton';
+import UserInfoForm from "./UserInfoForm";
+import ShippingAddressForm from "./ShippingAddressForm";
+import BillingForm from "./BillingForm";
+import Button from "../../UnstyledButton";
 
-const Form = ({
-  userInfo,
-}) => {
-  
+const Form = ({ userInfo }) => {
   const dispatch = useDispatch();
 
   const [formNumber, setFormNumber] = React.useState(1);
 
-
   const validateForm = (type, data) => {
     let newUserInfo = JSON.parse(JSON.stringify(userInfo));
-    let inputProblems = []
+    let inputProblems = [];
     switch (type) {
-      case 'Personal-Information':
-        if(data.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
-        if(data.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
-        if(!validateEmail(data.email))inputProblems = inputProblems.concat(['Email'])
-          
-        if(inputProblems.length){
-          return inputProblems
+      case "Personal-Information":
+        if (data.fname.length === 0)
+          inputProblems = inputProblems.concat(["First Name"]);
+        if (data.lname.length === 0)
+          inputProblems = inputProblems.concat(["Last Name"]);
+        if (!validateEmail(data.email))
+          inputProblems = inputProblems.concat(["Email"]);
+
+        if (inputProblems.length) {
+          return inputProblems;
         } else {
           newUserInfo = {
             ...newUserInfo,
@@ -49,87 +44,118 @@ const Form = ({
             lname: data.lname,
             email: data.email,
           };
-          dispatch(updateUserInfo(newUserInfo))
+          dispatch(updateUserInfo(newUserInfo));
           return false;
         }
-      break;
-      case 'Shipping-Address':
-        if(data.shippingAddress.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
-        if(data.shippingAddress.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
-        if(!validateAddress(data.shippingAddress.address) || data.shippingAddress.address.length===0)inputProblems = inputProblems.concat(['Address'])
-        if(!validateOnlyLetters(data.shippingAddress.city) || data.shippingAddress.city.length===0)inputProblems = inputProblems.concat(['City'])
-        if(data.shippingAddress.province !=='on' && data.shippingAddress.province !=='qc')inputProblems = inputProblems.concat(['Province'])
-        if(!validatePostalCode(data.shippingAddress.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
-        if(!validateOnlyDigits(data.shippingAddress.phoneNumber) || data.shippingAddress.phoneNumber.length!==10)inputProblems = inputProblems.concat(['Phone Number'])
-        if(inputProblems.length){
+        break;
+      case "Shipping-Address":
+        if (data.shippingAddress.fname.length === 0)
+          inputProblems = inputProblems.concat(["First Name"]);
+        if (data.shippingAddress.lname.length === 0)
+          inputProblems = inputProblems.concat(["Last Name"]);
+        if (
+          !validateAddress(data.shippingAddress.address) ||
+          data.shippingAddress.address.length === 0
+        )
+          inputProblems = inputProblems.concat(["Address"]);
+        if (
+          !validateOnlyLetters(data.shippingAddress.city) ||
+          data.shippingAddress.city.length === 0
+        )
+          inputProblems = inputProblems.concat(["City"]);
+        if (
+          data.shippingAddress.province !== "on" &&
+          data.shippingAddress.province !== "qc"
+        )
+          inputProblems = inputProblems.concat(["Province"]);
+        if (!validatePostalCode(data.shippingAddress.postalCode))
+          inputProblems = inputProblems.concat(["Postal Code"]);
+        if (
+          !validateOnlyDigits(data.shippingAddress.phoneNumber) ||
+          data.shippingAddress.phoneNumber.length !== 10
+        )
+          inputProblems = inputProblems.concat(["Phone Number"]);
+        if (inputProblems.length) {
           return inputProblems;
         } else {
           newUserInfo = {
             ...newUserInfo,
             shippingAddress: data.shippingAddress,
-          }
-          dispatch(updateUserInfo(newUserInfo))
+          };
+          dispatch(updateUserInfo(newUserInfo));
         }
-      break;
-      case 'Billing-info':
-        if(data.billingInfo.fname.length===0)inputProblems = inputProblems.concat(['First Name'])
-        if(data.billingInfo.lname.length===0)inputProblems = inputProblems.concat(['Last Name'])
-        if(!validateAddress(data.billingInfo.address))inputProblems = inputProblems.concat(['Address'])
-        if(!validateOnlyLetters(data.billingInfo.city) || data.billingInfo.city.length===0)inputProblems = inputProblems.concat(['City'])
+        break;
+      case "Billing-info":
+        if (data.billingInfo.fname.length === 0)
+          inputProblems = inputProblems.concat(["First Name"]);
+        if (data.billingInfo.lname.length === 0)
+          inputProblems = inputProblems.concat(["Last Name"]);
+        if (!validateAddress(data.billingInfo.address))
+          inputProblems = inputProblems.concat(["Address"]);
+        if (
+          !validateOnlyLetters(data.billingInfo.city) ||
+          data.billingInfo.city.length === 0
+        )
+          inputProblems = inputProblems.concat(["City"]);
         // if(data.billingInfo.province!=='on' || data.shippingAddress.province!=='qc')inputProblems = inputProblems.concat(['Province'])
-        if(!validatePostalCode(data.billingInfo.postalCode))inputProblems = inputProblems.concat(['Postal Code'])
-        if(!validateCreditCard(data.billingInfo.cardNumber))inputProblems = inputProblems.concat(['Card Number'])
-        if(inputProblems.length){
+        if (!validatePostalCode(data.billingInfo.postalCode))
+          inputProblems = inputProblems.concat(["Postal Code"]);
+        if (!validateCreditCard(data.billingInfo.cardNumber))
+          inputProblems = inputProblems.concat(["Card Number"]);
+        if (inputProblems.length) {
           return inputProblems;
         } else {
           newUserInfo = {
             ...newUserInfo,
             billingInfo: data.billingInfo,
-          }
-          dispatch(updateUserInfo(newUserInfo))
+          };
+          dispatch(updateUserInfo(newUserInfo));
         }
-      break;
+        break;
       default:
-      break;
+        break;
     }
-
-  }
-
+  };
 
   return (
     <Wrapper>
-      <UserInfoForm 
-      setFormNumber={setFormNumber}
-      formNumber={formNumber}
-      userInfo={userInfo}
-      validateForm={validateForm}
+      <UserInfoForm
+        setFormNumber={setFormNumber}
+        formNumber={formNumber}
+        userInfo={userInfo}
+        validateForm={validateForm}
       />
       <ShippingAddressForm
-      setFormNumber={setFormNumber}
-      formNumber={formNumber}
-      userInfo={userInfo}
-      validateForm={validateForm}
+        setFormNumber={setFormNumber}
+        formNumber={formNumber}
+        userInfo={userInfo}
+        validateForm={validateForm}
       />
       <BillingForm
-      setFormNumber={setFormNumber}
-      formNumber={formNumber}
-      userInfo={userInfo}
-      validateForm={validateForm}
+        setFormNumber={setFormNumber}
+        formNumber={formNumber}
+        userInfo={userInfo}
+        validateForm={validateForm}
       />
     </Wrapper>
   );
-}
+};
 
 export default Form;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: calc(100vh - 230px);
+  min-height: calc(100vh - 230px);
   /* background-color:#e6ecf0; */
   padding: 60px;
   display: flex;
-  flex-direction:column;
-  justify-content:space-between;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 800px) {
+    min-height: calc(100vh - 500px);
+    padding-bottom: 0px;
+    padding: 30px;
+  }
 `;
 
 const Buttons = styled.div`
@@ -139,14 +165,14 @@ const Buttons = styled.div`
 `;
 const NextBtn = styled(Button)`
   position: relative;
-  background-color:green;
+  background-color: green;
   right: 40px;
   bottom: 40px;
 `;
 
 const PreviousBtn = styled(Button)`
   position: relative;
-  background-color:blue;
+  background-color: blue;
   left: 40px;
   bottom: 40px;
 `;

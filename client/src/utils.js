@@ -1,4 +1,3 @@
-
 // const modifyString = (part, whole) => {
 //   const indexOfPart = whole.toLowerCase().indexOf(part);
 //   const part1 = whole.slice(0,indexOfPart)
@@ -8,102 +7,109 @@
 // }
 const modifyString = (part, whole) => {
   const indexOfPart = whole.toLowerCase().indexOf(part.toLowerCase());
-  const part1 = whole.substring(0,indexOfPart)
-  const part2 = whole.substring(indexOfPart,indexOfPart+part.length)
-  const part3 = whole.substring(indexOfPart+part.length)
-  const modification = [part1, part2, part3]
+  const part1 = whole.substring(0, indexOfPart);
+  const part2 = whole.substring(indexOfPart, indexOfPart + part.length);
+  const part3 = whole.substring(indexOfPart + part.length);
+  const modification = [part1, part2, part3];
   return modification;
-}
+};
 // need to add the image tp be sent back
 export const typeaheadSuggestion = (input, totalOptions) => {
   const suggestions1 = [];
-  totalOptions.forEach(option => {
-    if(option.name.toLowerCase().includes(input.toLowerCase())) suggestions1.push({
-      id: option.id,
-      name: option.name,
+  totalOptions.forEach((option) => {
+    if (option.name.toLowerCase().includes(input.toLowerCase()))
+      suggestions1.push({
+        id: option.id,
+        name: option.name,
       });
   });
   const suggestions2 = [];
-  suggestions1.forEach(suggestion=>suggestions2.push({
-    id: suggestion.id,
-    parts: modifyString(input, suggestion.name), //returns an array with 2 indexes: 1-everything in the 'name' string BEFORE the input. 
-    // 2 -everything in the 'name' string AFTER the input.
-    }))
+  suggestions1.forEach((suggestion) =>
+    suggestions2.push({
+      id: suggestion.id,
+      parts: modifyString(input, suggestion.name), //returns an array with 2 indexes: 1-everything in the 'name' string BEFORE the input.
+      // 2 -everything in the 'name' string AFTER the input.
+    })
+  );
   return suggestions2;
-}
+};
 
 const modifyPriceArr = (priceArr) => {
-  return priceArr.map(priceItem => ({
-    priceNumber: priceItem.price.slice(1)*100, // eliminates the '$', and multiplies by 100 to get rid of the decimal point.
+  return priceArr.map((priceItem) => ({
+    priceNumber: priceItem.price.slice(1) * 100, // eliminates the '$', and multiplies by 100 to get rid of the decimal point.
     quantity: priceItem.quantity,
-    }))
-}
+  }));
+};
 
 export const totalAmount = (items, itemsId) => {
-  const priceArr = itemsId.map(id=>({
+  const priceArr = itemsId.map((id) => ({
     price: items[id].price,
     quantity: items[id].quantity,
-    }));
+  }));
   if (priceArr.length) {
     const modifiedPriceArr = modifyPriceArr(priceArr);
-    const totalSum = modifiedPriceArr.reduce((temporarySum, priceItem) => temporarySum + (priceItem.priceNumber*priceItem.quantity), 0) // calculates the sum, multiplying each price in the quantity
-    return (totalSum/100).toFixed(2); // need to divide by 100, because we multiplied by 100
+    const totalSum = modifiedPriceArr.reduce(
+      (temporarySum, priceItem) =>
+        temporarySum + priceItem.priceNumber * priceItem.quantity,
+      0
+    ); // calculates the sum, multiplying each price in the quantity
+    return (totalSum / 100).toFixed(2); // need to divide by 100, because we multiplied by 100
   } else return -1; // if there is a problem, returns -1
-}
+};
 
 export const validateString = (string) => {
-  if(typeof string === 'string' && string.length>0){
+  if (typeof string === "string" && string.length > 0) {
     return true;
   } else {
     return false;
   }
-}
+};
 
-export const  validateEmail = (email) => {
+export const validateEmail = (email) => {
   // taken from: https://www.w3resource.com/javascript/form/email-validation.php
   // checks: 'LL..LL@LL..LL.LLL.LLLL.LL
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)){
-      return true;
-    } else {
-      return false;
-    }
-} 
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 export const validateAddress = (address) => {
-  if(/^(\w+ ?\b(\w+)?\b[0-9]+)|(^[0-9]+ ?\b\w+ ?\b(\w+)?)/.test(address)){
+  if (/^(\w+ ?\b(\w+)?\b[0-9]+)|(^[0-9]+ ?\b\w+ ?\b(\w+)?)/.test(address)) {
     return true;
   } else {
     return false;
   }
-}
+};
 
 export const validatePostalCode = (postalCode) => {
-  if(/^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$/.test(postalCode)){
+  if (/^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$/.test(postalCode)) {
     return true;
   } else {
     return false;
   }
-}
+};
 
 export const validateOnlyDigits = (string) => {
-  if(/^[0-9]+$/.test(string)){
+  if (/^[0-9]+$/.test(string)) {
     return true;
   } else {
     return false;
   }
-}
+};
 
 export const validateOnlyLetters = (string) => {
-  if(/^[A-Za-z]+$/.test(string)){
+  if (/^[A-Za-z]+$/.test(string)) {
     return true;
   } else {
     return false;
   }
-}
+};
 
 export const validateCreditCard = (string) => {
   //card info taken from https://www.w3resource.com/javascript/form/credit-card-validation.php
-  if(/^[0-9]+$/.test(string)){
+  if (/^[0-9]+$/.test(string)) {
     // if(/^(?:3[47][0-9]{13})$/.test(string) || // american Express
     // /^(?:4[0-9]{12}(?:[0-9]{3})?)$/.test(string) || // Visa
     // /^(?:5[1-5][0-9]{14})$/.test(string) || //MasterCard
@@ -115,4 +121,15 @@ export const validateCreditCard = (string) => {
   } else {
     return false;
   }
+};
+
+export function debounce(fn, ms) {
+  let timer;
+  return (_) => {
+    clearTimeout(timer);
+    timer = setTimeout((_) => {
+      timer = null;
+      fn.apply(this, arguments);
+    }, ms);
+  };
 }

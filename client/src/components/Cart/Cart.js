@@ -1,28 +1,18 @@
 import React from "react";
-import styled from 'styled-components';
-import {
-  useSelector,
-  useDispatch,
-} from 'react-redux';
-import {
-  useHistory,
-} from 'react-router-dom';
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
+import { addTotalToCart } from "../../Redux/actions";
 
-import {
-  addTotalToCart,
-} from '../../Redux/actions';
+import CartItem from "./CartItem";
+import Button from "../UnstyledButton";
+import { totalAmount } from "../../utils";
 
-import CartItem from './CartItem';
-import Button from '../UnstyledButton';
-import {
-  totalAmount,
-} from '../../utils';
-
-const Cart = ({toggle}) => {
+const Cart = ({ toggle }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const cart = useSelector(state => state.userInfo.cart);
+  const cart = useSelector((state) => state.userInfo.cart);
   const cartIds = Object.keys(cart);
 
   const total = totalAmount(cart, cartIds);
@@ -31,21 +21,24 @@ const Cart = ({toggle}) => {
     <Wrapper>
       <Header>Your shopping cart </Header>
       <ItemsContainer>
-        {cartIds.map((id, index)=><CartItem key={id+index} item={cart[id]} toggle={toggle}/>)}
+        {cartIds.map((id, index) => (
+          <CartItem key={id + index} item={cart[id]} toggle={toggle} />
+        ))}
       </ItemsContainer>
       <Footer>
-        {total===-1?null:(<p>Total: ${total}</p>)}
+        {total === -1 ? null : <p>Total: ${total}</p>}
         <CheckoutBtn
-          onClick={()=>{
+          onClick={() => {
             toggle();
-            history.push('/checkout');
+            history.push("/checkout");
           }}
-        >Continue to checkout
+        >
+          Continue to checkout
         </CheckoutBtn>
       </Footer>
     </Wrapper>
   );
-}
+};
 
 export default Cart;
 
@@ -54,11 +47,14 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr 8fr 1fr;
   margin-bottom: 40px;
-  height: 100%;
+  height: calc(100vh - 70px);
   grid-template-areas:
-    'header'
-    'items-container'
-    'footer';
+    "header"
+    "items-container"
+    "footer";
+  @media (max-width: 700px) {
+    height: calc(100vh - 200px);
+  }
 `;
 
 const Header = styled.h2`
@@ -70,25 +66,26 @@ const Header = styled.h2`
 
 const ItemsContainer = styled.div`
   grid-area: items-container;
-  overflow-y:auto;
+  overflow: scroll;
 `;
 
 const Footer = styled.div`
   grid-area: footer;
+  margin-top: 25px;
   margin-bottom: 5rem;
-  p{
+  p {
     font-size: 1.2em;
   }
 `;
 
 const CheckoutBtn = styled(Button)`
-outline: none;
-background-color: red;
-color: white;
-padding: 10px 30px;
-border: 1px solid white;
-font-size: 1em;
-margin-top: 10px;
-cursor: pointer;
-border-radius: 4px;
+  outline: none;
+  background-color: red;
+  color: white;
+  padding: 10px 30px;
+  border: 1px solid white;
+  font-size: 1em;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
 `;

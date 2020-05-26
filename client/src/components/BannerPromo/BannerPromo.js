@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const BannerPromo = () => {
   return (
     <Wrapper data-css="WrapperBannerPromo">
-      <p>Let's stay connected, and active.</p>
+      <p>Let's stay connected and active.</p>
       <Link to="/items">
         <BtnPromo data-css="BtnPromo">Browse all our items</BtnPromo>
       </Link>

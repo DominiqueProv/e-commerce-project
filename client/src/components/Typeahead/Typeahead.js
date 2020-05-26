@@ -64,11 +64,12 @@ const Typeahead = ({ toggle, dimensions }) => {
   const handleClickOnItemInSuggestionDropdown = (ev, suggestion) => {
     ev.preventDefault();
     ev.stopPropagation();
-    if (dimensions.width < 700) {
-      toggle();
-    }
+
     history.push(`/items/${suggestion.id}`);
     setSearchInputVal("");
+    if (dimensions) {
+      toggle();
+    }
   };
 
   return (

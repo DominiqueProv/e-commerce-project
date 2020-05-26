@@ -10,9 +10,9 @@ const OrderSuccess = () => {
       <Wrapper>
         <div>
           <img src={logoWearables} alt="logo wearables" />
-          <h2>Thank you for your purshase WEARABLES</h2>
+          <h2>Thank you for your purshase</h2>
           <h3>
-            Here is you confirmation number:{" "}
+            Here's you confirmation number:{" "}
             <span style={{ fontWeight: "700" }}> {orderId}</span>
           </h3>
           <Link to="/">

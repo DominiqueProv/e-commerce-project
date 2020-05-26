@@ -1,54 +1,42 @@
-# Wearables E-Commerce Project
+# WEARABLES Online Store
 
-[See the list of TEAMS](__documentation/TEAMS.md)
+## E-commerce platform demo
 
-You will make use of _everything_ that you have learned thus far in the bootcamp to build an e-commerce app that will showcase all of the provided _wearables_ items.
+![TrailSync UI](/client/public/assets/wearables-UI.jpg)
 
-The stack is React.Js, Redux, Node.Js, and styled-components.
+### Setup
 
-Your node server should be RESTful and follow REST principles, at least to the extent we learned during the bootcamp.
+##### Frontend
 
-## Getting Started
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<img src="./server/assets/software-dev-path.jpg" style="width: 100%;" />
+##### Available Scripts
 
-You have your assignment and your team. What should you do first? This will vary for every team, and even every team member.
+In the project directory, you can run:
 
-**The important thing is to NOT just jump in and start coding!**
+###### `yarn start`
 
-There probably shouldn't be any coding until very near the end of the first day.
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Meet your Product Manager!
+The page will reload if you make edits.
 
-Each team has been assigned a product manager. This person is in charge of answering questions, guiding you and basically preventing everything from falling apart!
+You will also see any lint errors in the console.
 
-This person should be prevent for some of your team meetings but not all. PMs are super busy people and have multiple projects, people to manage.
+##### Built with
 
-## Planning
+<ul>
+<li>React.js/Redux</li>
+<li>Node.js</a></li>
+<li>Expxress</li>
+<li>MongoDb</li>
+</ul>
 
-1. You will break into 3 groups (with your assigned PM.)
-2. Your PM will answer any initial questions, and give you more information, as required.
-3. Break into a separate meeting with just your team. \_Your PM will bounce from team to team to make sure you're on track.
-4. Time to use the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDA.md)
+##### Features
 
-### First team meeting
-
-It could also be a good/fun idea to give yourselves an original team name. :)
-
-Your first team meeting should start with the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDa.md).
-
-[Successful Software Project Delivery in 10 Steps](https://www.appnovation.com/blog/successful-software-project-delivery-10-steps).
-
-💡 How a project starts is indicative of how it will end.
-
-## Teamwork
-
-The most important aspect of this project is the ability to work in a team. No matter your contribution to the project, yuo should understand the _full_ codebase. This will require that you
-
-- **review** each other's code
-- **ask** questions when you don't understand
-- **comment** your code extensively. _Always go for clarity over brevity._
-
-## GitHub
-
-see the [GITHUB Document](__documentation/GITHUB.md)
+<ul>
+  <li>Regex Form Validation</li>
+  <li>Auth0</li>
+  <li>Search/Filter Items</li>
+  <li>Material-UI API</li>
+</ul>

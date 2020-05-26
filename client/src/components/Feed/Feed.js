@@ -138,6 +138,9 @@ const WrapperItems = styled.section`
   @media (max-width: 1024px) {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
+  @media (max-width: 550px) {
+    padding: 30px;
+  }
 `;
 
 const LoaderWrapper = styled.div`
